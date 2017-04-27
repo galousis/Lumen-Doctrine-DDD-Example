@@ -1,0 +1,14 @@
+/vendor
+/node_modules 
+/public/storage 
+/public/hot 
+bootstrap/compiled.php 
+/Application/.env
+Homestead.yaml 
+Homestead.json
+ _ide_helper.php 
+phpdoc.dist.xml
+## Directory-based project format:
+/.idea
+/.project
+composer.lock

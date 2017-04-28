@@ -10,5 +10,6 @@ Homestead.json
 phpdoc.dist.xml
 ## Directory-based project format:
 /.idea
+/Application/storage
 /.project
 composer.lock

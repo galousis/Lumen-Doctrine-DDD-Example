@@ -5,6 +5,7 @@ namespace Application\Core\Http\Controllers;
 use Application\Core\Services\Manager\ManagerService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class ManagerController
@@ -36,6 +37,8 @@ class ManagerController extends Controller
         $data = $request->only(['email','password']);
         $email = $data['email'];
         $password = $data['password'];
+
+		//$a = Crypt::encrypt($password);
 
         return $this->managerAppService->login($email,$password);
     }

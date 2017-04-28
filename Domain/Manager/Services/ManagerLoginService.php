@@ -11,6 +11,7 @@ use Domain\Manager\Contracts\ManagerLoginServiceContract;
 use Domain\Manager\Contracts\ManagerRepositoryContract;
 use Application\Core\Exceptions\JWTException; //should call a exception from Domain...
 use Firebase\JWT\JWT;  //infraestructure dependency
+use Illuminate\Support\Facades\Crypt;
 
 /**
  * Class ManagerLoginService
@@ -32,16 +33,20 @@ class ManagerLoginService implements ManagerLoginServiceContract
         $this->repository = $repository;
     }
 
-    /**
-     * @param $email
-     * @param $password
-     * @return array
-     */
+	/**
+	 * @param $email
+	 * @param $password
+	 * @return array
+	 * @throws JWTException
+	 */
     public function execute($email, $password){
 
         $manager = $this->repository->findByEmail($email);
 
-        if (password_verify($password, $manager->getPassword())) {
+		$encrypted = $manager->getPassword();
+
+		// password_verify($password, $manager->getPassword())
+        if ( $password == Crypt::decrypt($encrypted)) {
 
             //$tokenId    = base64_encode(mcrypt_create_iv(32));
             $issuedAt   = time();
